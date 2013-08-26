@@ -1,11 +1,19 @@
-// Testing Class for Percolation object
+/**
+ *  Testing Class for Percolation object
+ * @author deki
+ *
+ */
 public class PercolationStats 
 {
 	
-	private double percolationtThreshold[];
-	private int T;
+	private double percolationtThreshold[]; // table of results gained from running Simulation T times
+	private int T; // times we run the simulation
 	
-	// perform T independent computational experiments on an N-by-N grid
+	/** 
+	 * perform T independent computational experiments on an N-by-N grid
+	 * @param N size of the table N * N
+	 * @param T times simulation plays
+	 */
 	public PercolationStats (int N, int T) 
 	{
 		this.T = T; 
@@ -16,7 +24,7 @@ public class PercolationStats
 		{
 			Percolation per = new Percolation(N);
 			int perTrashhold = 0;
-			while (per.percolates() == false && perTrashhold < N*N)
+			while (per.percolates() == false)
 			{
 				int i = 1 + StdRandom.uniform(N);
 				int j = 1 + StdRandom.uniform(N);
@@ -28,39 +36,53 @@ public class PercolationStats
 				}
 			}
 			double threshold = perTrashhold / Math.pow(N, 2);
+			// System.out.println(threshold);
 			
 			percolationtThreshold[runTimes] = threshold;
 			runTimes++;
 		}
 	}
 	
-	// sample mean of percolation threshold
+	/**
+	 *  sample mean of percolation threshold
+	 * @return returns statistical main of this simulation
+	 */
 	public double mean()
 	{		
 		return StdStats.mean(percolationtThreshold);
 	}
 	
-	// sample standard deviation of percolation threshold
+	/**
+	 *  sample standard deviation of percolation threshold
+	 * @return returns standard deviation of the sample size
+	 */
 	public double stddev()
 	{
 		return StdStats.stddev(percolationtThreshold);
 	}
 	
-	// returns lower bound of the 95% confidence interval
+	/**
+	 * Lower bound of the 95% confidence interval if T > 15
+	 * @return returns lower bound of the 95% confidence interval
+	 */
 	public double confidenceLo()
 	{
 		return mean() - (1.96 * stddev()) / Math.sqrt(this.T);
 	}
 	
-	// returns upper bound of the 95% confidence interval
+	/**
+	 *  Upper bound of the 95% confidence interval if T > 15
+	 * @return Upper bound of the 95% confidence interval
+	 */
 	public double confidenceHi()
 	{
 		return mean() + (1.96 * stddev()) / Math.sqrt(this.T);		
 	}
 		
-	// test client 
-	// input 1 size of the Table
-	// input 2 number of repeat operations
+	/**
+	 * Test client 
+	 * @param args input 1 size of the Table, input 2 number of repeat operations	 
+	 */	
 	public static void main (String[] args)
 	{
 		
