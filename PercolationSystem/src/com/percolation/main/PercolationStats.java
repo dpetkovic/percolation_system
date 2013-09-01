@@ -4,20 +4,13 @@ import edu.princeton.cs.introcs.StdOut;
 import edu.princeton.cs.introcs.StdRandom;
 import edu.princeton.cs.introcs.StdStats;
 
-
 /**
  * Testing Class for Percolation object
  * Runs a Monte-Carlo Simulation on a N * N table T times 
  * and outputs how many times the system percolates
- * http://en.wikipedia.org/wiki/Percolation
  * @author Dejan Pekovic
  *
  */
-
-
-
-
-
 public class PercolationStats 
 {
 	
@@ -31,6 +24,7 @@ public class PercolationStats
 	 */
 	public PercolationStats (int N, int T) 
 	{
+		isGreaterThanZero(N, T);
 		this.T = T; 
 		percolationtThreshold = new double[T];
 		
@@ -58,6 +52,10 @@ public class PercolationStats
 		}
 	}
 	
+	private void isGreaterThanZero(int n, int t) {
+		if (n <= 0 ||  t <= 0) throw new IndexOutOfBoundsException("row index i out of bounds");		
+	}
+
 	/**
 	 *  sample mean of percolation threshold
 	 * @return returns statistical main of this simulation
@@ -95,7 +93,7 @@ public class PercolationStats
 	}
 		
 	/**
-	 * Test client 
+	 * Test client that output's the results in console
 	 * @param args input 1 size of the Table, input 2 number of repeat operations	 
 	 */	
 	public static void main (String[] args)

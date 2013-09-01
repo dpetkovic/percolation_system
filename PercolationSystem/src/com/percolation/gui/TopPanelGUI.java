@@ -5,22 +5,25 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout.Constraints;
-
 import com.percolation.main.PercolationStats;
 
+import edu.princeton.cs.algs4.Stopwatch;
 
-
-
-
+/**
+ * Top panel of our gui, it uses PercolationStats class
+ * It has two fields for entering parameters
+ * First is the size of the table
+ * Second is the number of times the simulation plays
+ * @author deki
+ */
 public class TopPanelGUI extends JPanel {
-	
+		
+	private static final long serialVersionUID = 1L;
 	JTextField field1; // text in the first text field
 	JTextField field2; // text in the second text field
 	
@@ -34,27 +37,33 @@ public class TopPanelGUI extends JPanel {
 		setBorder(BorderFactory.createTitledBorder("Monte Carlo Simulation"));
 		
 		// add Swing items to this panel
-		JLabel label1 = new JLabel("N - Velicina Table(N * N): ");
-		JLabel label2 = new JLabel("T - Broj ponavljanja: ");
+		JLabel label1 = new JLabel("N - Size of the Table (N * N): ");
+		JLabel label2 = new JLabel("T - Number Of Runs: ");
 		
-		field1 = new JTextField(10);
-		field2 = new JTextField(10);
+		field1 = new JTextField(11);
+		field2 = new JTextField(11);
 		
 		JButton button = new JButton("Start Simulation");
 		// add action listener and event
 		button.addActionListener(new ActionListener() {
 			
-			// On click this starts ResutScreenGui JFram and passes the PreculationStats data
+			// On click this starts ResultScreenGui JFrame class and passes the PreculationStats data
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int N = getN();
 				int T = getT();
 				
+				Stopwatch stopwatch = new Stopwatch();
 				PercolationStats ps = new PercolationStats(N, T);
-				String mean = 	"Mean                    = " + ps.mean();
-				String stddev = "Standard Deviation      = " + ps.stddev();
-				String HiLo = 	"95% confidence interval = " + ps.confidenceLo() + ", " + ps.confidenceHi();
-				ResultScreenGUI result = new ResultScreenGUI(mean, stddev, HiLo);
+				
+				// results of running PercolationStats object after passing N and T  
+				// N - size of the Table (N * N)
+				// T - times object runs the simulation
+				String runTime= "" + stopwatch.elapsedTime(); // gets run Time
+				String mean = 	"" + ps.mean(); // gets Mean - look at Statistics
+				String stddev = "" + ps.stddev(); // gets Standard Deviation
+				String HiLo = 	"" + ps.confidenceLo() + ", " + ps.confidenceHi(); // gets 95% confidence interval:
+				ResultScreenGUI result = new ResultScreenGUI(mean, stddev, HiLo, runTime);
 				result.pack();
 				result.setVisible(true);
 			}
@@ -96,9 +105,7 @@ public class TopPanelGUI extends JPanel {
 		gc.gridx = 1;
 		gc.gridy = 2;
 		add(button, gc);
-		
-		
-		
+	
 	}
 	
 	/**

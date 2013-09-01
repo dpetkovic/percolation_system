@@ -13,10 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
-
-
-
 public class MidPanelGUI extends JPanel{
 	
 	JTextField field1;
@@ -42,10 +38,9 @@ public class MidPanelGUI extends JPanel{
 		setBorder(BorderFactory.createTitledBorder("Interactive Simulation"));
 			
 		// add Swing items to this panel
-		JLabel label1 = new JLabel("N - Velicina Table(N * N): ");
-		
-		
-		field1 = new JTextField(10);
+		JLabel label1 = new JLabel("N - Size of the Table (N * N): ");
+			
+		field1 = new JTextField(11);
 		
 		
 		JButton button = new JButton("Start Simulation");
@@ -55,8 +50,9 @@ public class MidPanelGUI extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
-				// int input = Integer.parseInt(field1.getText());
-				InteractivePercolationVisualizer myRunnable = new InteractivePercolationVisualizer(); 
+				int input = Integer.parseInt(field1.getText());
+				
+				InteractivePercolationVisualizer myRunnable = new InteractivePercolationVisualizer(input);				
 				Thread myThread = new Thread(myRunnable);
 				myThread.setDaemon(true); // important, otherwise JVM does not exit at end of main()
 				myThread.start(); 	

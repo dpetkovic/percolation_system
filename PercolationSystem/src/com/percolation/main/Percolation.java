@@ -3,13 +3,11 @@ package com.percolation.main;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 /**
- * Simulation of percolation
- * http://en.wikipedia.org/wiki/Percolation
+ *  Simulation of percolation, This uses Weighted Quick Union Algorithm to connect nodes in a N * N size array
+ * for more information look at this - link http://en.wikipedia.org/wiki/Percolation
+ * more about specification for this project - http://coursera.cs.princeton.edu/algs4/assignments/percolation.html
  * @author Dejan Pekovic
- * 
  */
-
-
 public class Percolation 
 {
 	private WeightedQuickUnionUF union; // quick union object

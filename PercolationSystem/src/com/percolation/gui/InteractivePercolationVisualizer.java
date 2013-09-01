@@ -18,11 +18,15 @@ import edu.princeton.cs.introcs.StdOut;
  *  open sites (that aren't full) in white, and blocked sites in black.
  *
  *	made by Princeton University for Algorithms, Part I
- *	modded by deki to run in PercolationGUI
- *	problem cant make it run with the main JFrame
+ *	modded by Dejan to run in PercolationGUI
  ****************************************************************************/
 
 public class InteractivePercolationVisualizer implements Runnable {
+	private static int size;
+	
+	public InteractivePercolationVisualizer(int sizeOfTable) {
+		this.size = sizeOfTable; 
+	}
 		
 	/**
 	 * Makes a N(rows) * N(column) size panel, by clicking in the black space using a mouse
@@ -31,7 +35,7 @@ public class InteractivePercolationVisualizer implements Runnable {
 	 * "does not percolate" to "percolates" 
 	 * @param size number of rows and columns
 	 */
-	public static void runSim(int size) {
+	public static void runSim() {
         // N-by-N percolation system (read from command-line, default = 10)
         final int sizeN = size; 
         						
@@ -74,14 +78,10 @@ public class InteractivePercolationVisualizer implements Runnable {
             StdDraw.show(20);
         }
 		
-	}
-			
-		
-                       
-    
+	}			 
 
 	@Override
 	public void run() {
-		runSim(10);		
+		runSim();		
 	}	    
 }

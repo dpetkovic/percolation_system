@@ -9,13 +9,15 @@ package com.percolation.gui;
  *  From that file, it
  *
  *    - Reads the grid size N of the percolation system.
- *    - Creates an N-by-N grid of sites (intially all blocked)
+ *    - Creates an N-by-N grid of sites (initially all blocked)
  *    - Reads in a sequence of sites (row i, column j) to open.
  *
  *  After each site is opened, it draws full sites in light blue,
  *  open sites (that aren't full) in white, and blocked sites in black,
  *  with with site (1, 1) in the upper left-hand corner.
  *
+ *	made by Princeton University for Algorithms, Part I
+ *	modded by Dejan to run in PercolationGUI
  ****************************************************************************/
 
 
@@ -27,9 +29,8 @@ import edu.princeton.cs.introcs.In;
 import edu.princeton.cs.introcs.StdDraw;
 
 public class PercolationVisualizer implements Runnable{
-
-    // delay in miliseconds (controls animation speed)
-    private static final int DELAY = 100;
+   
+    private static final int DELAY = 100; // delay in miliseconds (controls animation speed)
     private static String fileToRun;
 
     // draw N-by-N percolation system
